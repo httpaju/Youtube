@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced YouTube Downloader</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        input, button, select { padding: 10px; margin: 5px; width: 300px; }
+        #progress { display: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>Advanced YouTube Video & Audio Downloader</h2>
+    
+    <input type="text" id="youtubeURL" placeholder="Enter YouTube Video URL">
+    
+    <h3>Select Format:</h3>
+    <select id="format">
+        <option value="video">Video (MP4)</option>
+        <option value="audio">Audio (MP3)</option>
+    </select>
+
+    <h3>Select Quality:</h3>
+    <select id="quality">
+        <option value="highest">Best Quality</option>
+        <option value="1080p">1080p</option>
+        <option value="720p">720p</option>
+        <option value="480p">480p</option>
+    </select>
+
+    <br>
+    <button onclick="downloadMedia()">Download</button>
+    
+    <p id="progress">Downloading... Please wait.</p>
+
+    <script>
+        function downloadMedia() {
+            const url = document.getElementById('youtubeURL').value;
+            const format = document.getElementById('format').value;
+            const quality = document.getElementById('quality').value;
+            const progress = document.getElementById('progress');
+
+            if (!url) {
+                alert("Please enter a YouTube URL!");
+                return;
+            }
+
+            progress.style.display = "block";
+            window.location.href = `/download?url=${encodeURIComponent(url)}&format=${format}&quality=${quality}`;
+        }
+    </script>
+</body>
+</html>
