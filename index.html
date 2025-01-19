@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video & Music Downloader</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #fff;
+            padding: 50px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            background: -webkit-linear-gradient(45deg, #ff9a8b, #ff6a88, #ff99ac);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Input & Select Fields */
+        input, select {
+            padding: 12px;
+            width: 320px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            text-align: center;
+            margin: 10px 0;
+            outline: none;
+            background: #222;
+            color: #fff;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus {
+            background: #333;
+        }
+
+        /* Button Styling */
+        button {
+            background: linear-gradient(90deg, #ff6a88, #ff99ac);
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #ff9a8b, #ff6a88);
+            transform: scale(1.05);
+        }
+
+        /* Download Link */
+        #downloadLink {
+            display: none;
+            margin-top: 20px;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            color: #ff99ac;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        #downloadLink a {
+            color: #ff99ac;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        #downloadLink a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <h2>🎵 YouTube Video & Music Downloader 🎬</h2>
+
+    <input type="text" id="youtubeURL" placeholder="Enter YouTube Video URL">
+    
+    <h3>Select Format:</h3>
+    <select id="format">
+        <option value="mp4">Video (MP4)</option>
+        <option value="mp3">Audio (MP3)</option>
+    </select>
+
+    <br>
+    <button onclick="getDownloadLink()">Get Download Link</button>
+    
+    <p id="downloadLink"></p>
+
+    <script>
+        async function getDownloadLink() {
+            const url = document.getElementById('youtubeURL').value;
+            const format = document.getElementById('format').value;
+            const downloadText = document.getElementById('downloadLink');
+
+            if (!url.includes("youtube.com") && !url.includes("youtu.be")) {
+                alert("Please enter a valid YouTube URL!");
+                return;
+            }
+
+            // Use a third-party YouTube downloader API
+            const apiURL = `https://api.vevioz.com/api/button/${format}?url=${encodeURIComponent(url)}`;
+
+            // Show download link
+            downloadText.style.display = "block";
+            downloadText.innerHTML = `🎉 Download: <a href="${apiURL}" target="_blank">Click Here</a>`;
+        }
+    </script>
+</body>
+</html>
